@@ -11,6 +11,7 @@
 		D18E7D4F2AAF08EE0055C876 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18E7D4E2AAF08EE0055C876 /* SceneDelegate.swift */; };
 		D18E7D562AAF08EF0055C876 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D18E7D552AAF08EF0055C876 /* Assets.xcassets */; };
 		D18E7D592AAF08EF0055C876 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D18E7D572AAF08EF0055C876 /* LaunchScreen.storyboard */; };
+		D18E7D632AAF0DBD0055C876 /* SportsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18E7D622AAF0DBD0055C876 /* SportsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +21,7 @@
 		D18E7D552AAF08EF0055C876 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D18E7D582AAF08EF0055C876 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D18E7D5A2AAF08EF0055C876 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D18E7D622AAF0DBD0055C876 /* SportsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +55,7 @@
 			isa = PBXGroup;
 			children = (
 				D18E7D602AAF09600055C876 /* Startup */,
+				D18E7D612AAF0B8A0055C876 /* Controllers */,
 				D18E7D552AAF08EF0055C876 /* Assets.xcassets */,
 				D18E7D5A2AAF08EF0055C876 /* Info.plist */,
 			);
@@ -67,6 +70,14 @@
 				D18E7D572AAF08EF0055C876 /* LaunchScreen.storyboard */,
 			);
 			path = Startup;
+			sourceTree = "<group>";
+		};
+		D18E7D612AAF0B8A0055C876 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				D18E7D622AAF0DBD0055C876 /* SportsViewController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,6 +150,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D18E7D632AAF0DBD0055C876 /* SportsViewController.swift in Sources */,
 				D18E7D4D2AAF08EE0055C876 /* AppDelegate.swift in Sources */,
 				D18E7D4F2AAF08EE0055C876 /* SceneDelegate.swift in Sources */,
 			);
