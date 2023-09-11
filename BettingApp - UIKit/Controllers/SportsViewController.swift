@@ -8,7 +8,7 @@
 import UIKit
 
 class SportsViewController: UIViewController {
-    var sportsLayoutType = "collection"
+    var layout: String = "collection"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,9 +28,13 @@ class SportsViewController: UIViewController {
     }
     
     func createElements() {
+        view.subviews.forEach({ subview in
+            subview.removeFromSuperview()
+        })
+        
         createMenuBar()
         
-        if sportsLayoutType == "collection" {
+        if layout == "collection" {
             createSportsCollectionView()
         }
         else {
@@ -39,21 +43,30 @@ class SportsViewController: UIViewController {
     }
     
     func createMenuBar() {
-        let menuBarViewFrame = CGRect(x: 0, y: 100, width: view.frame.width, height: 50)
-        let menuBarView = UIView(frame: menuBarViewFrame)
+        let menuBarViewFrame: CGRect = CGRect(x: 0, y: 100, width: view.frame.width, height: 50)
+        
+        let menuBarView: UIView = UIView(frame: menuBarViewFrame)
         menuBarView.backgroundColor = .systemGray5
         
-        let collectionViewButtonFrame = CGRect(x: menuBarViewFrame.width - 100, y: 0, width: menuBarViewFrame.height, height: menuBarViewFrame.height)
-        let collectionViewButton = UIButton(frame: collectionViewButtonFrame)
+        let collectionViewButtonFrame: CGRect = CGRect(x: menuBarViewFrame.width - 100, y: 0, width: menuBarViewFrame.height, height: menuBarViewFrame.height)
+        
+        let collectionViewButton: UIButton = UIButton(frame: collectionViewButtonFrame)
         collectionViewButton.setImage(UIImage(systemName: "square.grid.3x3"), for: .normal)
-        collectionViewButton.backgroundColor = .systemGray3
+        if layout == "collection" {
+            collectionViewButton.backgroundColor = .systemGray3
+        }
+        collectionViewButton.addTarget(self, action: #selector(showCollectionLayout(sender:)), for: .primaryActionTriggered)
         
         menuBarView.addSubview(collectionViewButton)
         
-        let tableViewButtonFrame = CGRect(x: menuBarViewFrame.width - 50, y: 0, width: menuBarViewFrame.height, height: menuBarViewFrame.height)
-        let tableViewButton = UIButton(frame: tableViewButtonFrame)
+        let tableViewButtonFrame: CGRect = CGRect(x: menuBarViewFrame.width - 50, y: 0, width: menuBarViewFrame.height, height: menuBarViewFrame.height)
+        
+        let tableViewButton: UIButton = UIButton(frame: tableViewButtonFrame)
         tableViewButton.setImage(UIImage(systemName: "list.bullet"), for: .normal)
-        tableViewButton.backgroundColor = .systemGray4
+        if layout == "table" {
+            tableViewButton.backgroundColor = .systemGray3
+        }
+        tableViewButton.addTarget(self, action: #selector(showTableLayout(sender:)), for: .primaryActionTriggered)
         
         menuBarView.addSubview(tableViewButton)
         
@@ -61,14 +74,103 @@ class SportsViewController: UIViewController {
     }
     
     func createSportsCollectionView() {
+        let sportsCollectionViewFrame: CGRect = CGRect(x: 0, y: 150, width: Int(view.frame.width), height: Int(sportsMock.count / 3 + 1) * 100)
+        let sportsCollectionViewFlowLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         
+        let sportsCollectionView: UICollectionView = UICollectionView(frame: sportsCollectionViewFrame, collectionViewLayout: sportsCollectionViewFlowLayout)
+        sportsCollectionView.register(SportCollectionCell.self, forCellWithReuseIdentifier: SportCollectionCell.identifier)
+        sportsCollectionView.dataSource = self
+        sportsCollectionView.delegate = self
+        
+        self.view.addSubview(sportsCollectionView)
     }
     
     func createSportsTableView() {
+        let sportsTableViewFrame: CGRect = CGRect(x: 0, y: 150, width: Int(view.frame.width), height: sportsMock.count * 60)
         
+        let sportsTableView: UITableView = UITableView(frame: sportsTableViewFrame)
+        sportsTableView.register(SportTableCell.self, forCellReuseIdentifier: SportTableCell.identifier)
+        sportsTableView.dataSource = self
+        sportsTableView.delegate = self
+        
+        self.view.addSubview(sportsTableView)
     }
     
     @objc func searchButtonHandler() {
         
+    }
+    
+    @objc func showCollectionLayout(sender: UIButton) {
+        if layout != "collection" {
+            layout = "collection"
+        }
+        
+        createElements()
+    }
+    
+    @objc func showTableLayout(sender: UIButton) {
+        if layout != "table" {
+            layout = "table"
+        }
+        
+        createElements()
+    }
+}
+
+extension SportsViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return sportsMock.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell: SportCollectionCell = collectionView.dequeueReusableCell(withReuseIdentifier: SportCollectionCell.identifier, for: indexPath) as! SportCollectionCell
+        
+        let sport: Sport = sportsMock[indexPath.row]
+        
+        cell.configureImage(image: sport.image)
+        cell.configureLabel(text: sport.name)
+        
+        return cell
+    } 
+}
+
+extension SportsViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.width / 3, height: collectionView.frame.height / 3)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+}
+
+extension SportsViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return sportsMock.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell: SportTableCell = tableView.dequeueReusableCell(withIdentifier: SportTableCell.identifier) as! SportTableCell
+        
+        let sport: Sport = sportsMock[indexPath.row]
+        
+        cell.configureImage(image: sport.image)
+        cell.configureLabel(text: sport.name)
+        
+        return cell
+    }
+}
+
+extension SportsViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
     }
 }
