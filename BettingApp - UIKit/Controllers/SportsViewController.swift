@@ -74,7 +74,8 @@ class SportsViewController: UIViewController {
     }
     
     func createSportsCollectionView() {
-        let sportsCollectionViewFrame: CGRect = CGRect(x: 0, y: 150, width: Int(view.frame.width), height: Int(sportsMock.count / 3 + 1) * 100)
+        let sportsCollectionViewFrame: CGRect = CGRect(x: 0, y: 150, width: Int(view.frame.width), height: Int(ceil(Double(sportsMock.count) / 4.0)) * ((Int(view.frame.width - 25) / 4) + 40) + 15)
+        
         let sportsCollectionViewFlowLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         
         let sportsCollectionView: UICollectionView = UICollectionView(frame: sportsCollectionViewFrame, collectionViewLayout: sportsCollectionViewFlowLayout)
@@ -92,6 +93,7 @@ class SportsViewController: UIViewController {
         sportsTableView.register(SportTableCell.self, forCellReuseIdentifier: SportTableCell.identifier)
         sportsTableView.dataSource = self
         sportsTableView.delegate = self
+        sportsTableView.separatorInset = UIEdgeInsets.zero
         
         self.view.addSubview(sportsTableView)
     }
@@ -128,7 +130,7 @@ extension SportsViewController: UICollectionViewDataSource {
         let sport: Sport = sportsMock[indexPath.row]
         
         cell.configureImage(image: sport.image)
-        cell.configureLabel(text: sport.name)
+        cell.configureLabel(text: sport.name.capitalized)
         
         return cell
     } 
@@ -136,19 +138,19 @@ extension SportsViewController: UICollectionViewDataSource {
 
 extension SportsViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width / 3, height: collectionView.frame.height / 3)
+        return CGSize(width: (collectionView.frame.width - 25) / 4, height: (collectionView.frame.width - 25) / 4 + 40)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
+        return 5
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        return UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
+        return 5
     }
 }
 
@@ -163,7 +165,7 @@ extension SportsViewController: UITableViewDataSource {
         let sport: Sport = sportsMock[indexPath.row]
         
         cell.configureImage(image: sport.image)
-        cell.configureLabel(text: sport.name)
+        cell.configureLabel(text: sport.name.capitalized)
         
         return cell
     }

@@ -34,16 +34,27 @@ class SportCollectionCell: UICollectionViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        imageView.frame = CGRect(x: 0, y: 0, width: contentView.frame.width, height: contentView.frame.height - 50)
-        label.frame = CGRect(x: 0, y: contentView.frame.height - 50, width: contentView.frame.width, height:50)
+        self.layer.cornerRadius = 10
+        self.clipsToBounds = true
+        self.backgroundColor = .systemGray5
+        
+        imageView.frame = CGRect(x: 0, y: 0, width: contentView.frame.width - 20, height: contentView.frame.width - 20)
+        label.frame = CGRect(x: 0, y: contentView.frame.height - 40, width: contentView.frame.width, height: 40)
     }
     
     func configureImage(image: String) {
         imageView.image = UIImage(systemName: image)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 15).isActive = true
+        imageView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -55).isActive = true
+        imageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 15).isActive = true
+        imageView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -15).isActive = true
     }
     
     func configureLabel(text: String) {
         label.text = text
+        label.textAlignment = .center
+        label.font = .systemFont(ofSize: 14)
     }
     
     override func prepareForReuse() {
