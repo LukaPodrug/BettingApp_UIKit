@@ -74,7 +74,7 @@ class SportsViewController: UIViewController {
     }
     
     func createSportsCollectionView() {
-        let sportsCollectionViewFrame: CGRect = CGRect(x: 0, y: 150, width: Int(view.frame.width), height: Int(ceil(Double(sportsMock.count) / 4.0)) * ((Int(view.frame.width - 25) / 4) + 40) + 15)
+        let sportsCollectionViewFrame: CGRect = CGRect(x: 0, y: 150, width: Int(view.frame.width), height: Int(view.frame.height) - 250)
         
         let sportsCollectionViewFlowLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         
@@ -87,7 +87,7 @@ class SportsViewController: UIViewController {
     }
     
     func createSportsTableView() {
-        let sportsTableViewFrame: CGRect = CGRect(x: 0, y: 150, width: Int(view.frame.width), height: sportsMock.count * 60)
+        let sportsTableViewFrame: CGRect = CGRect(x: 0, y: 150, width: Int(view.frame.width), height: Int(view.frame.height) - 250)
         
         let sportsTableView: UITableView = UITableView(frame: sportsTableViewFrame)
         sportsTableView.register(SportTableCell.self, forCellReuseIdentifier: SportTableCell.identifier)
@@ -136,7 +136,17 @@ extension SportsViewController: UICollectionViewDataSource {
     } 
 }
 
-extension SportsViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+extension SportsViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let sport: Sport = sportsMock[indexPath.row]
+        
+        let competitionsViewController: CompetitionsViewController = CompetitionsViewController(sport: sport)
+        
+        navigationController?.pushViewController(competitionsViewController, animated: true)
+    }
+}
+
+extension SportsViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: (collectionView.frame.width - 25) / 4, height: (collectionView.frame.width - 25) / 4 + 40)
     }
@@ -174,5 +184,13 @@ extension SportsViewController: UITableViewDataSource {
 extension SportsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let sport: Sport = sportsMock[indexPath.row]
+        
+        let competitionsViewController: CompetitionsViewController = CompetitionsViewController(sport: sport)
+        
+        navigationController?.pushViewController(competitionsViewController, animated: true)
     }
 }
