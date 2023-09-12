@@ -19,7 +19,8 @@ class SportsViewController: UIViewController {
     }
     
     func viewCustomization() {
-        view.backgroundColor = .white
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .green
     }
     
     func navigationItemCustomization() {
@@ -40,6 +41,8 @@ class SportsViewController: UIViewController {
         else {
             createSportsTableView()
         }
+        
+        createTicketBar()
     }
     
     func createMenuBar() {
@@ -55,7 +58,7 @@ class SportsViewController: UIViewController {
         if layout == "collection" {
             collectionViewButton.backgroundColor = .systemGray3
         }
-        collectionViewButton.addTarget(self, action: #selector(showCollectionLayout(sender:)), for: .primaryActionTriggered)
+        collectionViewButton.addTarget(self, action: #selector(showCollectionLayout), for: .primaryActionTriggered)
         
         menuBarView.addSubview(collectionViewButton)
         
@@ -66,15 +69,15 @@ class SportsViewController: UIViewController {
         if layout == "table" {
             tableViewButton.backgroundColor = .systemGray3
         }
-        tableViewButton.addTarget(self, action: #selector(showTableLayout(sender:)), for: .primaryActionTriggered)
+        tableViewButton.addTarget(self, action: #selector(showTableLayout), for: .primaryActionTriggered)
         
         menuBarView.addSubview(tableViewButton)
         
-        self.view.addSubview(menuBarView)
+        view.addSubview(menuBarView)
     }
     
     func createSportsCollectionView() {
-        let sportsCollectionViewFrame: CGRect = CGRect(x: 0, y: 150, width: Int(view.frame.width), height: Int(view.frame.height) - 250)
+        let sportsCollectionViewFrame: CGRect = CGRect(x: 0, y: 150, width: Int(view.frame.width), height: Int(view.frame.height) - 230)
         
         let sportsCollectionViewFlowLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         
@@ -83,26 +86,71 @@ class SportsViewController: UIViewController {
         sportsCollectionView.dataSource = self
         sportsCollectionView.delegate = self
         
-        self.view.addSubview(sportsCollectionView)
+        view.addSubview(sportsCollectionView)
     }
     
     func createSportsTableView() {
-        let sportsTableViewFrame: CGRect = CGRect(x: 0, y: 150, width: Int(view.frame.width), height: Int(view.frame.height) - 250)
+        let sportsTableViewFrame: CGRect = CGRect(x: 0, y: 150, width: Int(view.frame.width), height: Int(view.frame.height) - 230)
         
         let sportsTableView: UITableView = UITableView(frame: sportsTableViewFrame)
         sportsTableView.register(SportTableCell.self, forCellReuseIdentifier: SportTableCell.identifier)
         sportsTableView.dataSource = self
         sportsTableView.delegate = self
         sportsTableView.separatorInset = UIEdgeInsets.zero
+        sportsTableView.alwaysBounceVertical = false
         
-        self.view.addSubview(sportsTableView)
+        view.addSubview(sportsTableView)
+    }
+    
+    func createTicketBar() {
+        let ticketBarViewFrame: CGRect = CGRect(x: 0, y: Int(view.frame.height) - 80, width: Int(view.frame.width), height: 80)
+        
+        let ticketBarView: UIView = UIView(frame: ticketBarViewFrame)
+        ticketBarView.backgroundColor = .systemGray5
+        
+        let numberOfPairsLabelFrame: CGRect = CGRect(x: 20, y: 5, width: (Int(view.frame.width) - 80) / 2, height: 20)
+        
+        let numberOfPairsLabel: UILabel = UILabel(frame: numberOfPairsLabelFrame)
+        numberOfPairsLabel.text = "2 pairs"
+        
+        ticketBarView.addSubview(numberOfPairsLabel)
+        
+        let stakeLabelFrame: CGRect = CGRect(x: 20, y: 30, width: (Int(view.frame.width) - 80) / 2, height: 20)
+        
+        let stakeLabel: UILabel = UILabel(frame: stakeLabelFrame)
+        stakeLabel.text = "stake: 10.00€"
+        
+        ticketBarView.addSubview(stakeLabel)
+        
+        let oddsLabelFrame: CGRect = CGRect(x: 20 + (Int(view.frame.width) - 80) / 2 + 10, y: 5, width: (Int(view.frame.width) - 80) / 2, height: 20)
+        
+        let oddsLabel: UILabel = UILabel(frame: oddsLabelFrame)
+        oddsLabel.text = "odds: 4.3450"
+        
+        ticketBarView.addSubview(oddsLabel)
+        
+        let returnLabelFrame: CGRect = CGRect(x: 20 + (Int(view.frame.width) - 80) / 2 + 10, y: 30, width: (Int(view.frame.width) - 80) / 2, height: 20)
+        
+        let returnLabel: UILabel = UILabel(frame: returnLabelFrame)
+        returnLabel.text = "return: 43.45€"
+        
+        ticketBarView.addSubview(returnLabel)
+        
+        let expandButtonFrame: CGRect = CGRect(x: 2 * (Int(view.frame.width) - 80) / 2 + 30, y: 5, width: Int(view.frame.width) - 2 * (Int(view.frame.width) - 80) / 2 - 40, height: 45)
+        
+        let expandButton: UIButton = UIButton(frame: expandButtonFrame)
+        expandButton.setImage(UIImage(systemName: "chevron.up.circle"), for: .normal)
+        
+        ticketBarView.addSubview(expandButton)
+        
+        view.addSubview(ticketBarView)
     }
     
     @objc func searchButtonHandler() {
         
     }
     
-    @objc func showCollectionLayout(sender: UIButton) {
+    @objc func showCollectionLayout() {
         if layout != "collection" {
             layout = "collection"
         }
@@ -110,7 +158,7 @@ class SportsViewController: UIViewController {
         createElements()
     }
     
-    @objc func showTableLayout(sender: UIButton) {
+    @objc func showTableLayout() {
         if layout != "table" {
             layout = "table"
         }

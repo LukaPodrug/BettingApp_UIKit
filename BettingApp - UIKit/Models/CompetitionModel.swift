@@ -20,17 +20,5 @@ let footballCompetitionsMock: [Competition] = [
     Competition(id: "3", sportId: "1", name: "champions league", area: "europe"),
     Competition(id: "4", sportId: "1", name: "serie a", area: "italy"),
     Competition(id: "5", sportId: "1", name: "la liga", area: "spain"),
-    Competition(id: "6", sportId: "1", name: "europa league", area: "europe"),
-    Competition(id: "1", sportId: "1", name: "premier lague", area: "england"),
-    Competition(id: "2", sportId: "1", name: "ligue 1", area: "france"),
-    Competition(id: "3", sportId: "1", name: "champions league", area: "europe"),
-    Competition(id: "4", sportId: "1", name: "serie a", area: "italy"),
-    Competition(id: "5", sportId: "1", name: "la liga", area: "spain"),
-    Competition(id: "6", sportId: "1", name: "europa league", area: "europe"),
-    Competition(id: "1", sportId: "1", name: "premier lague", area: "england"),
-    Competition(id: "2", sportId: "1", name: "ligue 1", area: "france"),
-    Competition(id: "3", sportId: "1", name: "champions league", area: "europe"),
-    Competition(id: "4", sportId: "1", name: "serie a", area: "italy"),
-    Competition(id: "5", sportId: "1", name: "la liga", area: "spain"),
     Competition(id: "6", sportId: "1", name: "europa league", area: "europe")
 ]
