@@ -128,10 +128,11 @@ extension MatchesViewController: UITableViewDataSource {
         let team1: Team = teamsMock.first(where: { $0.id == match.team1Id })!
         let team2: Team = teamsMock.first(where: { $0.id == match.team2Id })!
         
+        cell.configureTeam1LogoImageView(image: team1.logo)
+        cell.configureTeam1NameLabel(text: team1.name.capitalized)
         cell.configureDateLabel(text: match.date)
         cell.configureTimeLabel(text: match.time)
-        cell.configureTeam1LogoImageView(image: team1.logo)
-        cell.configureTeamNamesLabel(text: team1.name + " - " + team2.name)
+        cell.configureTeam2NameLabel(text: team2.name.capitalized)
         cell.configureTeam2LogoImageView(image: team2.logo)
         
         return cell

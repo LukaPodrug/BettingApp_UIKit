@@ -28,6 +28,9 @@ class CompetitionTableCell: UITableViewCell {
         self.imageView?.heightAnchor.constraint(equalToConstant: 40).isActive = true
         self.imageView?.topAnchor.constraint(equalTo: self.topAnchor, constant: 10).isActive = true
         self.imageView?.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10).isActive = true
+        self.imageView?.backgroundColor = .systemGray4
+        self.imageView?.layer.cornerRadius = 10
+        self.imageView?.contentMode = .scaleAspectFit
     }
     
     func textLabelCustomization() {
