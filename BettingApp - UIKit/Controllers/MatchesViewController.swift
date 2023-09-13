@@ -1,20 +1,22 @@
 //
-//  CompetitionsViewController.swift
+//  MatchesViewController.swift
 //  BettingApp - UIKit
 //
-//  Created by Luka Podrug on 11.09.2023..
+//  Created by Luka Podrug on 13.09.2023..
 //
 
 import UIKit
 
-class CompetitionsViewController: UIViewController {
+class MatchesViewController: UIViewController {
     var sport: Sport
-    var competitions: [Competition]
+    var competition: Competition
+    var matches: [Match]
     
-    init(sport: Sport) {
+    init(sport: Sport, competition: Competition) {
         self.sport = sport
-        self.competitions = competitionsMock.filter({ competition in
-            if competition.sportId == sport.id {
+        self.competition = competition
+        self.matches = matchesMock.filter({ match in
+            if match.sportId == sport.id && match.competitionId == competition.id {
                 return true
             }
             else {
@@ -43,7 +45,7 @@ class CompetitionsViewController: UIViewController {
     }
     
     func navigationItemCustomization() {
-        navigationItem.title = sport.name.capitalized
+        navigationItem.title = competition.name.capitalized
     }
     
     func createElements() {
@@ -51,21 +53,21 @@ class CompetitionsViewController: UIViewController {
             subview.removeFromSuperview()
         })
         
-        createCompetitionsTableView()
+        createMatchesTableView()
         createTicketBar()
     }
     
-    func createCompetitionsTableView() {
-        let competitionsTableViewFrame: CGRect = CGRect(x: 0, y: 100, width: Int(view.frame.width), height: Int(view.frame.height) - 180)
+    func createMatchesTableView() {
+        let matchesTableViewFrame: CGRect = CGRect(x: 0, y: 100, width: Int(view.frame.width), height: Int(view.frame.height) - 180)
 
-        let competitionsTableView: UITableView = UITableView(frame: competitionsTableViewFrame)
-        competitionsTableView.register(CompetitionTableCell.self, forCellReuseIdentifier: CompetitionTableCell.identifier)
-        competitionsTableView.dataSource = self
-        competitionsTableView.delegate = self
-        competitionsTableView.separatorInset = UIEdgeInsets.zero
-        competitionsTableView.alwaysBounceVertical = false
+        let matchesTableView: UITableView = UITableView(frame: matchesTableViewFrame)
+        matchesTableView.register(MatchTableCell.self, forCellReuseIdentifier: MatchTableCell.identifier)
+        matchesTableView.dataSource = self
+        matchesTableView.delegate = self
+        matchesTableView.separatorInset = UIEdgeInsets.zero
+        matchesTableView.alwaysBounceVertical = false
         
-        self.view.addSubview(competitionsTableView)
+        self.view.addSubview(matchesTableView)
     }
     
     func createTicketBar() {
@@ -113,34 +115,31 @@ class CompetitionsViewController: UIViewController {
     }
 }
 
-extension CompetitionsViewController: UITableViewDataSource {
+extension MatchesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return competitions.count
+        return matches.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: CompetitionTableCell = tableView.dequeueReusableCell(withIdentifier: CompetitionTableCell.identifier) as! CompetitionTableCell
+        let cell: MatchTableCell = tableView.dequeueReusableCell(withIdentifier: MatchTableCell.identifier) as! MatchTableCell
         
-        let competition: Competition = competitions[indexPath.row]
+        let match: Match = matches[indexPath.row]
         
-        cell.configureImage(image: competition.logo)
-        cell.configureMainLabel(text: competition.name.capitalized)
-        cell.configureDetailsLabel(text: competition.area.capitalized)
+        let team1: Team = teamsMock.first(where: { $0.id == match.team1Id })!
+        let team2: Team = teamsMock.first(where: { $0.id == match.team2Id })!
+        
+        cell.configureDateLabel(text: match.date)
+        cell.configureTimeLabel(text: match.time)
+        cell.configureTeam1LogoImageView(image: team1.logo)
+        cell.configureTeamNamesLabel(text: team1.name + " - " + team2.name)
+        cell.configureTeam2LogoImageView(image: team2.logo)
         
         return cell
     }
 }
 
-extension CompetitionsViewController: UITableViewDelegate {
+extension MatchesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let competition: Competition = competitions[indexPath.row]
-        
-        let matchesViewController: MatchesViewController = MatchesViewController(sport: sport, competition: competition)
-        
-        navigationController?.pushViewController(matchesViewController, animated: true)
     }
 }

@@ -20,12 +20,11 @@ class SportsViewController: UIViewController {
     
     func viewCustomization() {
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .green
+        view.backgroundColor = .systemGray5
     }
     
     func navigationItemCustomization() {
         navigationItem.title = "sports".capitalized
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "search".capitalized, style: .plain, target: self, action: #selector(searchButtonHandler))
     }
     
     func createElements() {
@@ -49,12 +48,13 @@ class SportsViewController: UIViewController {
         let menuBarViewFrame: CGRect = CGRect(x: 0, y: 100, width: view.frame.width, height: 50)
         
         let menuBarView: UIView = UIView(frame: menuBarViewFrame)
-        menuBarView.backgroundColor = .systemGray5
+        menuBarView.backgroundColor = .systemGray4
         
         let collectionViewButtonFrame: CGRect = CGRect(x: menuBarViewFrame.width - 100, y: 0, width: menuBarViewFrame.height, height: menuBarViewFrame.height)
         
         let collectionViewButton: UIButton = UIButton(frame: collectionViewButtonFrame)
         collectionViewButton.setImage(UIImage(systemName: "square.grid.3x3"), for: .normal)
+        collectionViewButton.tintColor = .black
         if layout == "collection" {
             collectionViewButton.backgroundColor = .systemGray3
         }
@@ -66,6 +66,7 @@ class SportsViewController: UIViewController {
         
         let tableViewButton: UIButton = UIButton(frame: tableViewButtonFrame)
         tableViewButton.setImage(UIImage(systemName: "list.bullet"), for: .normal)
+        tableViewButton.tintColor = .black
         if layout == "table" {
             tableViewButton.backgroundColor = .systemGray3
         }
@@ -144,10 +145,6 @@ class SportsViewController: UIViewController {
         ticketBarView.addSubview(expandButton)
         
         view.addSubview(ticketBarView)
-    }
-    
-    @objc func searchButtonHandler() {
-        
     }
     
     @objc func showCollectionLayout() {

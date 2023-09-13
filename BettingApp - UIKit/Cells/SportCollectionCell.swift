@@ -36,7 +36,7 @@ class SportCollectionCell: UICollectionViewCell {
         
         self.layer.cornerRadius = 10
         self.clipsToBounds = true
-        self.backgroundColor = .systemGray5
+        self.backgroundColor = .systemGray4
         
         imageView.frame = CGRect(x: 0, y: 0, width: contentView.frame.width - 20, height: contentView.frame.width - 20)
         label.frame = CGRect(x: 0, y: contentView.frame.height - 40, width: contentView.frame.width, height: 40)
@@ -44,6 +44,7 @@ class SportCollectionCell: UICollectionViewCell {
     
     func configureImage(image: String) {
         imageView.image = UIImage(systemName: image)
+        imageView.tintColor = .black
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 15).isActive = true
         imageView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -55).isActive = true
