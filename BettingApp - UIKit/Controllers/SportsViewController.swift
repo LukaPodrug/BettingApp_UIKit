@@ -41,7 +41,7 @@ class SportsViewController: UIViewController {
             createSportsTableView()
         }
         
-        createTicketBar()
+        //createTicketBar()
     }
     
     func createMenuBar() {

@@ -52,7 +52,7 @@ class CompetitionsViewController: UIViewController {
         })
         
         createCompetitionsTableView()
-        createTicketBar()
+        //createTicketBar()
     }
     
     func createCompetitionsTableView() {

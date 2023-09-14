@@ -59,7 +59,7 @@ class OddsViewController: UIViewController {
         })
         
         createOddsTableView()
-        createTicketBar()
+        //createTicketBar()
     }
     
     func createOddsTableView() {

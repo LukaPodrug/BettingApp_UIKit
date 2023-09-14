@@ -12,6 +12,7 @@
 		D10A55052AB1B421007802D0 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D10A55042AB1B421007802D0 /* UIImageView.swift */; };
 		D12284C62AB1FA6500A23278 /* OddsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D12284C52AB1FA6500A23278 /* OddsViewController.swift */; };
 		D12284C82AB1FA7C00A23278 /* OddTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D12284C72AB1FA7C00A23278 /* OddTableCell.swift */; };
+		D147EC4B2AB388E300DE8D08 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D147EC4A2AB388E300DE8D08 /* BaseViewController.swift */; };
 		D16E00D72AAFBB400012D722 /* CompetitionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16E00D62AAFBB400012D722 /* CompetitionsViewController.swift */; };
 		D16E00D92AAFC1980012D722 /* CompetitionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16E00D82AAFC1980012D722 /* CompetitionModel.swift */; };
 		D16E00DB2AAFC3190012D722 /* CompetitionTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16E00DA2AAFC3190012D722 /* CompetitionTableCell.swift */; };
@@ -35,6 +36,7 @@
 		D10A55042AB1B421007802D0 /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
 		D12284C52AB1FA6500A23278 /* OddsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OddsViewController.swift; sourceTree = "<group>"; };
 		D12284C72AB1FA7C00A23278 /* OddTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OddTableCell.swift; sourceTree = "<group>"; };
+		D147EC4A2AB388E300DE8D08 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		D16E00D62AAFBB400012D722 /* CompetitionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsViewController.swift; sourceTree = "<group>"; };
 		D16E00D82AAFC1980012D722 /* CompetitionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionModel.swift; sourceTree = "<group>"; };
 		D16E00DA2AAFC3190012D722 /* CompetitionTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionTableCell.swift; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 		D18E7D612AAF0B8A0055C876 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				D147EC4A2AB388E300DE8D08 /* BaseViewController.swift */,
 				D19A71392AB24F4700D2ED4F /* TicketViewController.swift */,
 				D18E7D622AAF0DBD0055C876 /* SportsViewController.swift */,
 				D16E00D62AAFBB400012D722 /* CompetitionsViewController.swift */,
@@ -223,6 +226,7 @@
 				D184B8192AB0B78D00130AB0 /* OddModel.swift in Sources */,
 				D10A55022AB1B3CA007802D0 /* MatchTableCell.swift in Sources */,
 				D16E00DB2AAFC3190012D722 /* CompetitionTableCell.swift in Sources */,
+				D147EC4B2AB388E300DE8D08 /* BaseViewController.swift in Sources */,
 				D18E7D4D2AAF08EE0055C876 /* AppDelegate.swift in Sources */,
 				D16E00D72AAFBB400012D722 /* CompetitionsViewController.swift in Sources */,
 				D10A55052AB1B421007802D0 /* UIImageView.swift in Sources */,

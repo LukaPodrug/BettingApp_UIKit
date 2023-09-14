@@ -54,7 +54,7 @@ class MatchesViewController: UIViewController {
         })
         
         createMatchesTableView()
-        createTicketBar()
+        //createTicketBar()
     }
     
     func createMatchesTableView() {
