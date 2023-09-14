@@ -13,6 +13,8 @@ class CompetitionTableCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
         
+        self.selectionStyle = .none
+        
         imageViewCustomization()
         textLabelCustomization()
         detailTextCustomization()

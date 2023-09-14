@@ -11,14 +11,14 @@ class MatchTableCell: UITableViewCell {
     static let identifier: String = "MatchTableCell"
     
     let team1LogoImageView: UIImageView = {
-        let imageView = UIImageView()
+        let imageView: UIImageView = UIImageView()
         imageView.backgroundColor = .systemGray4
         imageView.layer.cornerRadius = 10
         return imageView
     }()
     
     let team1NameLabel: UILabel = {
-        let label = UILabel()
+        let label: UILabel = UILabel()
         label.textAlignment = .center
         label.font = .systemFont(ofSize: 13)
         label.numberOfLines = 3
@@ -26,7 +26,7 @@ class MatchTableCell: UITableViewCell {
     }()
     
     let dateLabel: UILabel = {
-        let label = UILabel()
+        let label: UILabel = UILabel()
         label.textAlignment = .center
         label.font = .boldSystemFont(ofSize: 12)
         label.layer.cornerRadius = 5
@@ -36,7 +36,7 @@ class MatchTableCell: UITableViewCell {
     }()
     
     let timeLabel: UILabel = {
-        let label = UILabel()
+        let label: UILabel = UILabel()
         label.textAlignment = .center
         label.font = .boldSystemFont(ofSize: 10)
         label.layer.cornerRadius = 5
@@ -46,7 +46,7 @@ class MatchTableCell: UITableViewCell {
     }()
     
     let team2NameLabel: UILabel = {
-        let label = UILabel()
+        let label: UILabel = UILabel()
         label.textAlignment = .center
         label.font = .systemFont(ofSize: 13)
         label.numberOfLines = 3
@@ -54,7 +54,7 @@ class MatchTableCell: UITableViewCell {
     }()
     
     let team2LogoImageView: UIImageView = {
-        let imageView = UIImageView()
+        let imageView: UIImageView = UIImageView()
         imageView.backgroundColor = .systemGray4
         imageView.layer.cornerRadius = 10
         return imageView
@@ -62,6 +62,8 @@ class MatchTableCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        self.selectionStyle = .none
         
         contentView.addSubview(team1LogoImageView)
         contentView.addSubview(team1NameLabel)

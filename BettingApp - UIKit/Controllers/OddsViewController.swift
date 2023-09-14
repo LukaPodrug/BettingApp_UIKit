@@ -1,5 +1,5 @@
 //
-//  MatchesViewController.swift
+//  OddsViewController.swift
 //  BettingApp - UIKit
 //
 //  Created by Luka Podrug on 13.09.2023..
@@ -7,16 +7,18 @@
 
 import UIKit
 
-class MatchesViewController: UIViewController {
+class OddsViewController: UIViewController {
     var sport: Sport
     var competition: Competition
-    var matches: [Match]
+    var match: Match
+    var odds: [Odd]
     
-    init(sport: Sport, competition: Competition) {
+    init(sport: Sport, competition: Competition, match: Match) {
         self.sport = sport
         self.competition = competition
-        self.matches = matchesMock.filter({ match in
-            if match.sportId == sport.id && match.competitionId == competition.id {
+        self.match = match
+        self.odds = oddsMock.filter({ odd in
+            if odd.sportId == sport.id && odd.competitionId == competition.id && odd.matchId == match.id {
                 return true
             }
             else {
@@ -45,7 +47,10 @@ class MatchesViewController: UIViewController {
     }
     
     func navigationItemCustomization() {
-        navigationItem.title = competition.name.capitalized
+        let team1: Team = teamsMock.first(where: { $0.id == match.team1Id })!
+        let team2: Team = teamsMock.first(where: { $0.id == match.team2Id })!
+        
+        navigationItem.title = "\(team1.name.capitalized) - \(team2.name.capitalized)"
     }
     
     func createElements() {
@@ -53,21 +58,21 @@ class MatchesViewController: UIViewController {
             subview.removeFromSuperview()
         })
         
-        createMatchesTableView()
+        createOddsTableView()
         createTicketBar()
     }
     
-    func createMatchesTableView() {
-        let matchesTableViewFrame: CGRect = CGRect(x: 0, y: 100, width: Int(view.frame.width), height: Int(view.frame.height) - 180)
+    func createOddsTableView() {
+        let oddsTableViewFrame: CGRect = CGRect(x: 0, y: 100, width: Int(view.frame.width), height: Int(view.frame.height) - 180)
 
-        let matchesTableView: UITableView = UITableView(frame: matchesTableViewFrame)
-        matchesTableView.register(MatchTableCell.self, forCellReuseIdentifier: MatchTableCell.identifier)
-        matchesTableView.dataSource = self
-        matchesTableView.delegate = self
-        matchesTableView.separatorInset = UIEdgeInsets.zero
-        matchesTableView.alwaysBounceVertical = false
+        let oddsTableView: UITableView = UITableView(frame: oddsTableViewFrame)
+        oddsTableView.register(OddTableCell.self, forCellReuseIdentifier: OddTableCell.identifier)
+        oddsTableView.dataSource = self
+        oddsTableView.delegate = self
+        oddsTableView.separatorInset = UIEdgeInsets.zero
+        oddsTableView.alwaysBounceVertical = false
         
-        self.view.addSubview(matchesTableView)
+        self.view.addSubview(oddsTableView)
     }
     
     func createTicketBar() {
@@ -115,40 +120,33 @@ class MatchesViewController: UIViewController {
     }
 }
 
-extension MatchesViewController: UITableViewDataSource {
+extension OddsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return matches.count
+        return odds.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: MatchTableCell = tableView.dequeueReusableCell(withIdentifier: MatchTableCell.identifier) as! MatchTableCell
+        let cell: OddTableCell = tableView.dequeueReusableCell(withIdentifier: OddTableCell.identifier) as! OddTableCell
         
-        let match: Match = matches[indexPath.row]
+        let odd: Odd = odds[indexPath.row]
         
-        let team1: Team = teamsMock.first(where: { $0.id == match.team1Id })!
-        let team2: Team = teamsMock.first(where: { $0.id == match.team2Id })!
-        
-        cell.configureTeam1LogoImageView(image: team1.logo)
-        cell.configureTeam1NameLabel(text: team1.name.capitalized)
-        cell.configureDateLabel(text: match.date)
-        cell.configureTimeLabel(text: match.time)
-        cell.configureTeam2NameLabel(text: team2.name.capitalized)
-        cell.configureTeam2LogoImageView(image: team2.logo)
+        cell.configureOddNameLabel(text: odd.name.uppercased())
+        cell.configureOutcome1NameButton(text: odd.label1.uppercased())
+        cell.configureOutcome1ValueButton(text: NSDecimalNumber(decimal: odd.value1).stringValue)
+        cell.configureOutcomeX(nameText: odd.labelX?.uppercased(), valueText: NSDecimalNumber(decimal: odd.valueX ?? 1.00).stringValue)
+        cell.configureOutcome2NameButton(text: odd.label2.uppercased())
+        cell.configureOutcome2ValueButton(text: NSDecimalNumber(decimal: odd.value2).stringValue)
         
         return cell
     }
 }
 
-extension MatchesViewController: UITableViewDelegate {
+extension OddsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60
+        return 80
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let match: Match = matches[indexPath.row]
         
-        let oddsViewController: OddsViewController = OddsViewController(sport: sport, competition: competition, match: match)
-        
-        navigationController?.pushViewController(oddsViewController, animated: true)
     }
 }

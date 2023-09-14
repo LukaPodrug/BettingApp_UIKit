@@ -11,12 +11,12 @@ class SportCollectionCell: UICollectionViewCell {
     static let identifier: String = "SportCollectionCell"
     
     let imageView: UIImageView = {
-        let imageView = UIImageView()
+        let imageView: UIImageView = UIImageView()
         return imageView
     }()
     
     let label: UILabel = {
-        let label = UILabel()
+        let label: UILabel = UILabel()
         return label
     }()
     
