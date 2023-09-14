@@ -59,11 +59,10 @@ class OddsViewController: UIViewController {
         })
         
         createOddsTableView()
-        //createTicketBar()
     }
     
     func createOddsTableView() {
-        let oddsTableViewFrame: CGRect = CGRect(x: 0, y: 100, width: Int(view.frame.width), height: Int(view.frame.height) - 180)
+        let oddsTableViewFrame: CGRect = CGRect(x: 0, y: 100, width: Int(view.frame.width), height: Int(view.frame.height) - 100)
 
         let oddsTableView: UITableView = UITableView(frame: oddsTableViewFrame)
         oddsTableView.register(OddTableCell.self, forCellReuseIdentifier: OddTableCell.identifier)

@@ -54,11 +54,10 @@ class MatchesViewController: UIViewController {
         })
         
         createMatchesTableView()
-        //createTicketBar()
     }
     
     func createMatchesTableView() {
-        let matchesTableViewFrame: CGRect = CGRect(x: 0, y: 100, width: Int(view.frame.width), height: Int(view.frame.height) - 180)
+        let matchesTableViewFrame: CGRect = CGRect(x: 0, y: 100, width: Int(view.frame.width), height: Int(view.frame.height) - 100)
 
         let matchesTableView: UITableView = UITableView(frame: matchesTableViewFrame)
         matchesTableView.register(MatchTableCell.self, forCellReuseIdentifier: MatchTableCell.identifier)

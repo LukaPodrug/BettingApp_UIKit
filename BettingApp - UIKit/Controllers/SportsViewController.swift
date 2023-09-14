@@ -40,8 +40,6 @@ class SportsViewController: UIViewController {
         else {
             createSportsTableView()
         }
-        
-        //createTicketBar()
     }
     
     func createMenuBar() {
@@ -78,7 +76,7 @@ class SportsViewController: UIViewController {
     }
     
     func createSportsCollectionView() {
-        let sportsCollectionViewFrame: CGRect = CGRect(x: 0, y: 150, width: Int(view.frame.width), height: Int(view.frame.height) - 230)
+        let sportsCollectionViewFrame: CGRect = CGRect(x: 0, y: 150, width: Int(view.frame.width), height: Int(view.frame.height) - 150)
         
         let sportsCollectionViewFlowLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         
@@ -91,7 +89,7 @@ class SportsViewController: UIViewController {
     }
     
     func createSportsTableView() {
-        let sportsTableViewFrame: CGRect = CGRect(x: 0, y: 150, width: Int(view.frame.width), height: Int(view.frame.height) - 230)
+        let sportsTableViewFrame: CGRect = CGRect(x: 0, y: 150, width: Int(view.frame.width), height: Int(view.frame.height) - 150)
         
         let sportsTableView: UITableView = UITableView(frame: sportsTableViewFrame)
         sportsTableView.register(SportTableCell.self, forCellReuseIdentifier: SportTableCell.identifier)

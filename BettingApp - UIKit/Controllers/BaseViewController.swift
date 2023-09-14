@@ -18,10 +18,10 @@ class BaseViewController: UIViewController {
         addChild(navigationController)
         view.addSubview(navigationController.view)
         
-        let ticketViewController: TicketViewController = TicketViewController()
-        ticketViewController.view.frame = CGRect(x: 0, y: view.frame.height - 80, width: view.frame.width, height: 80)
+        let ticketBarViewController: TicketBarViewController = TicketBarViewController()
+        ticketBarViewController.view.frame = CGRect(x: 0, y: view.frame.height - 80, width: view.frame.width, height: 80)
         
-        addChild(ticketViewController)
-        view.addSubview(ticketViewController.view)
+        addChild(ticketBarViewController)
+        view.addSubview(ticketBarViewController.view)
     }
 }

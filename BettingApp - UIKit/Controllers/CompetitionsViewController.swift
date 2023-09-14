@@ -52,11 +52,10 @@ class CompetitionsViewController: UIViewController {
         })
         
         createCompetitionsTableView()
-        //createTicketBar()
     }
     
     func createCompetitionsTableView() {
-        let competitionsTableViewFrame: CGRect = CGRect(x: 0, y: 100, width: Int(view.frame.width), height: Int(view.frame.height) - 180)
+        let competitionsTableViewFrame: CGRect = CGRect(x: 0, y: 100, width: Int(view.frame.width), height: Int(view.frame.height) - 100)
 
         let competitionsTableView: UITableView = UITableView(frame: competitionsTableViewFrame)
         competitionsTableView.register(CompetitionTableCell.self, forCellReuseIdentifier: CompetitionTableCell.identifier)
