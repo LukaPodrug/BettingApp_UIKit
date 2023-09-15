@@ -8,10 +8,10 @@
 import UIKit
 
 class TicketBarViewController: UIViewController {
-    var numberOfPairsValue: String = UserDefaults().string(forKey: "numberOfPairs") ?? "0"
-    var stakeValue: String = UserDefaults().string(forKey: "stake") ?? "1.00"
-    var oddsValue: String = UserDefaults().string(forKey: "odds") ?? "1.00"
-    var returnValue: String = UserDefaults().string(forKey: "return") ?? "1.00"
+    var numberOfPairsValue: Int = UserDefaults().integer(forKey: "numberOfPairs")
+    var stakeValue: Decimal = Decimal(UserDefaults().double(forKey: "stake"))
+    var oddsValue: Decimal = Decimal(UserDefaults().double(forKey: "odds"))
+    var returnValue: Decimal = Decimal(UserDefaults().double(forKey: "return"))
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,28 +25,33 @@ class TicketBarViewController: UIViewController {
         let numberOfPairsLabelFrame: CGRect = CGRect(x: 20, y: 5, width: (Int(view.frame.width) - 80) / 2, height: 20)
         
         let numberOfPairsLabel: UILabel = UILabel(frame: numberOfPairsLabelFrame)
-        numberOfPairsLabel.text = "2 pairs"
+        if numberOfPairsValue == 1 {
+            numberOfPairsLabel.text = "1 pair"
+        }
+        else {
+            numberOfPairsLabel.text = "\(numberOfPairsValue) pairs"
+        }
         
         view.addSubview(numberOfPairsLabel)
         
         let stakeLabelFrame: CGRect = CGRect(x: 20, y: 30, width: (Int(view.frame.width) - 80) / 2, height: 20)
         
         let stakeLabel: UILabel = UILabel(frame: stakeLabelFrame)
-        stakeLabel.text = "stake: 10.00€"
+        stakeLabel.text = "stake: \(stakeValue)€".capitalized
         
         view.addSubview(stakeLabel)
         
         let oddsLabelFrame: CGRect = CGRect(x: 20 + (Int(view.frame.width) - 80) / 2 + 10, y: 5, width: (Int(view.frame.width) - 80) / 2, height: 20)
         
         let oddsLabel: UILabel = UILabel(frame: oddsLabelFrame)
-        oddsLabel.text = "odds: 4.3450"
+        oddsLabel.text = "odds: \(oddsValue)".capitalized
         
         view.addSubview(oddsLabel)
         
         let returnLabelFrame: CGRect = CGRect(x: 20 + (Int(view.frame.width) - 80) / 2 + 10, y: 30, width: (Int(view.frame.width) - 80) / 2, height: 20)
         
         let returnLabel: UILabel = UILabel(frame: returnLabelFrame)
-        returnLabel.text = "return: 43.45€"
+        returnLabel.text = "return: \(returnValue)€".capitalized
         
         view.addSubview(returnLabel)
         

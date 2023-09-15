@@ -11,6 +11,34 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        if UserDefaults().value(forKey: "numberOfPairs") == nil {
+            UserDefaults().set(0, forKey: "numberOfPairs")
+        }
+        
+        if UserDefaults().value(forKey: "stake") == nil {
+            UserDefaults().set(1.00, forKey: "stake")
+        }
+        
+        if UserDefaults().value(forKey: "odds") == nil {
+            UserDefaults().set(1.0000, forKey: "odds")
+        }
+        
+        if UserDefaults().value(forKey: "return") == nil {
+            UserDefaults().set(1.00, forKey: "return")
+        }
+        
+        if UserDefaults().value(forKey: "pairs") as? Data == nil {
+            do {
+                let pairs: [OddUserDefault] = []
+                let encodedPairs: Data = try JSONEncoder().encode(pairs)
+                UserDefaults().set(encodedPairs, forKey: "pairs")
+            }
+            catch {
+                
+            }
+        }
+        
         return true
     }
 

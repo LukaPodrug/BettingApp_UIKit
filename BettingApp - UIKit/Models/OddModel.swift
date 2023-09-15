@@ -21,6 +21,14 @@ struct Odd {
     let label2: String
 }
 
+struct OddUserDefault: Codable {
+    let id: String
+    let matchId: String
+    let competitionId: String
+    let sportId: String
+    let value: String
+}
+
 let oddsMock: [Odd] = [
     Odd(id: "1", matchId: "5", competitionId: "1", sportId: "1", name: "final score", value1: 2.10, valueX: 3.00, value2: 1.80, label1: "1", labelX: "x", label2: "2"),
     Odd(id: "2", matchId: "4", competitionId: "3", sportId: "1", name: "final score", value1: 1.30, valueX: 3.20, value2: 5.20, label1: "1", labelX: "x", label2: "2"),

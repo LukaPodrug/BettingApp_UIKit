@@ -12,6 +12,10 @@ class OddTableCell: UITableViewCell {
     
     var twoOptions: Bool = false
     
+    var id: String = {
+        return String()
+    }()
+    
     let oddNameLabel: UILabel = {
         let label: UILabel = UILabel()
         label.textAlignment = .center
@@ -149,6 +153,10 @@ class OddTableCell: UITableViewCell {
             
             outcome2ValueButton.frame = CGRect(x: 10 + (Int(self.frame.width) - 15) / 2, y: 55, width: (Int(self.frame.width) - 15) / 2, height: 20)
         }
+    }
+    
+    func configureId(text: String) {
+        id = text
     }
     
     func configureOddNameLabel(text: String) {
